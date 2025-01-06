@@ -134,7 +134,7 @@ void Sorter::mergeSort(EmployeeList *employees) {
     std::cout << "Merge Sort End Time: ";
     std::cout << std::put_time(localEndTime, "%H:%M:%S") << std::endl;
     std::cout << "Time taken by Merge Sort: " << duration.count() << " milliseconds" << std::endl;
-    std::cout << "Swaps Performed: " << swaps << std::endl;
+    std::cout << "Merge Performed: " << swaps << std::endl;
 }
 
 template<typename T>
@@ -183,6 +183,7 @@ Node<T> *Sorter::mergeSortRecur(Node<T> *head, long long *swaps) {
 void Sorter::insertionSort(EmployeeList *employees) {
     if (employees->isEmpty())
         return;
+
     long long swaps = 0;
     auto start = std::chrono::high_resolution_clock::now();
     std::time_t startTimeT = std::chrono::system_clock::to_time_t(start);
@@ -191,26 +192,28 @@ void Sorter::insertionSort(EmployeeList *employees) {
 
     Node<EmployeeModel> *sorted = nullptr;
     Node<EmployeeModel> *unsorted = employees->getHead();
+
     while (unsorted != nullptr) {
         Node<EmployeeModel> *current = unsorted;
         unsorted = unsorted->next;
 
         if (sorted == nullptr || current->data.id <= sorted->data.id) {
-            if (sorted != nullptr) {
-                swaps++;
-            }
             current->next = sorted;
             sorted = current;
         } else {
-            Node<EmployeeModel> *insertPosition = sorted;
-            while (insertPosition->next != nullptr && insertPosition->next->data.id < current->data.id) {
+            Node<EmployeeModel> *insertPosition = sorted; // Ni kepala kasi jalan sampai hujung
+            Node<EmployeeModel> *prevInsertPosition = nullptr;
+            while (insertPosition != nullptr && insertPosition->data.id < current->data.id) {
+                prevInsertPosition = insertPosition;
                 insertPosition = insertPosition->next;
-            }
-            if (insertPosition->next != current) {
                 swaps++;
             }
-            current->next = insertPosition->next;
-            insertPosition->next = current;
+            current->next = insertPosition;
+            if (prevInsertPosition != nullptr) {
+                prevInsertPosition->next = current;
+            } else {
+                sorted = current;
+            }
         }
     }
 
@@ -224,6 +227,7 @@ void Sorter::insertionSort(EmployeeList *employees) {
     } else {
         employees->setTail(nullptr);
     }
+
     auto end = std::chrono::high_resolution_clock::now();
     std::time_t endTimeT = std::chrono::system_clock::to_time_t(end);
     std::tm *localEndTime = std::localtime(&endTimeT);
