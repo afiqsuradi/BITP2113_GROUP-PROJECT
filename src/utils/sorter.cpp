@@ -32,7 +32,6 @@ void Sorter::splitList(Node<T> *source, Node<T> **frontRef, Node<T> **backRef) {
     slow->next = nullptr;
 }
 
-
 template<typename T>
 Node<T> *Sorter::mergeImproved(Node<T> *a, Node<T> *b, long long *swaps) {
     if (a == nullptr) return b;
@@ -49,7 +48,6 @@ Node<T> *Sorter::mergeImproved(Node<T> *a, Node<T> *b, long long *swaps) {
     }
     return merged;
 }
-
 
 template<typename T>
 Node<T> *Sorter::mergeSortRecurImproved(Node<T> *head, long long *swaps) {
