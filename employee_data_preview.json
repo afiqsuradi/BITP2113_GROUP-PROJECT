@@ -1,0 +1,370 @@
+[
+    {
+        "id": 3,
+        "name": "Employee 3",
+        "department": "HR",
+        "position": "Manager",
+        "Salary": [
+            {
+                "id": 1,
+                "payment_year": 2023,
+                "payment_month": 1,
+                "gross_pay": 3995.53,
+                "hours_worked": 193
+            },
+            {
+                "id": 2,
+                "payment_year": 2023,
+                "payment_month": 2,
+                "gross_pay": 5615.7,
+                "hours_worked": 187
+            },
+            {
+                "id": 3,
+                "payment_year": 2023,
+                "payment_month": 3,
+                "gross_pay": 9795.88,
+                "hours_worked": 185
+            },
+            {
+                "id": 4,
+                "payment_year": 2023,
+                "payment_month": 4,
+                "gross_pay": 5607.69,
+                "hours_worked": 199
+            },
+            {
+                "id": 5,
+                "payment_year": 2023,
+                "payment_month": 5,
+                "gross_pay": 8408.23,
+                "hours_worked": 176
+            },
+            {
+                "id": 6,
+                "payment_year": 2023,
+                "payment_month": 6,
+                "gross_pay": 6945.14,
+                "hours_worked": 199
+            },
+            {
+                "id": 7,
+                "payment_year": 2023,
+                "payment_month": 7,
+                "gross_pay": 4935.21,
+                "hours_worked": 162
+            },
+            {
+                "id": 8,
+                "payment_year": 2023,
+                "payment_month": 8,
+                "gross_pay": 5865.85,
+                "hours_worked": 181
+            },
+            {
+                "id": 9,
+                "payment_year": 2023,
+                "payment_month": 9,
+                "gross_pay": 8101.33,
+                "hours_worked": 184
+            },
+            {
+                "id": 10,
+                "payment_year": 2023,
+                "payment_month": 10,
+                "gross_pay": 9934.52,
+                "hours_worked": 182
+            },
+            {
+                "id": 11,
+                "payment_year": 2023,
+                "payment_month": 11,
+                "gross_pay": 9493.08,
+                "hours_worked": 162
+            },
+            {
+                "id": 12,
+                "payment_year": 2023,
+                "payment_month": 12,
+                "gross_pay": 8117.13,
+                "hours_worked": 177
+            }
+        ]
+    },
+    {
+        "id": 1,
+        "name": "Employee 1",
+        "department": "Operations",
+        "position": "Senior Analyst",
+        "Salary": [
+            {
+                "id": 1,
+                "payment_year": 2023,
+                "payment_month": 1,
+                "gross_pay": 5408.18,
+                "hours_worked": 195
+            },
+            {
+                "id": 2,
+                "payment_year": 2023,
+                "payment_month": 2,
+                "gross_pay": 4856.22,
+                "hours_worked": 189
+            },
+            {
+                "id": 3,
+                "payment_year": 2023,
+                "payment_month": 3,
+                "gross_pay": 7489.75,
+                "hours_worked": 184
+            },
+            {
+                "id": 4,
+                "payment_year": 2023,
+                "payment_month": 4,
+                "gross_pay": 3714.91,
+                "hours_worked": 183
+            },
+            {
+                "id": 5,
+                "payment_year": 2023,
+                "payment_month": 5,
+                "gross_pay": 6943.46,
+                "hours_worked": 196
+            },
+            {
+                "id": 6,
+                "payment_year": 2023,
+                "payment_month": 6,
+                "gross_pay": 5123.17,
+                "hours_worked": 178
+            },
+            {
+                "id": 7,
+                "payment_year": 2023,
+                "payment_month": 7,
+                "gross_pay": 9660.4,
+                "hours_worked": 190
+            },
+            {
+                "id": 8,
+                "payment_year": 2023,
+                "payment_month": 8,
+                "gross_pay": 9123.12,
+                "hours_worked": 177
+            },
+            {
+                "id": 9,
+                "payment_year": 2023,
+                "payment_month": 9,
+                "gross_pay": 7622.81,
+                "hours_worked": 193
+            },
+            {
+                "id": 10,
+                "payment_year": 2023,
+                "payment_month": 10,
+                "gross_pay": 6142.66,
+                "hours_worked": 174
+            },
+            {
+                "id": 11,
+                "payment_year": 2023,
+                "payment_month": 11,
+                "gross_pay": 4571.44,
+                "hours_worked": 162
+            },
+            {
+                "id": 12,
+                "payment_year": 2023,
+                "payment_month": 12,
+                "gross_pay": 3934.47,
+                "hours_worked": 160
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "name": "Employee 4",
+        "department": "Operations",
+        "position": "Analyst",
+        "Salary": [
+            {
+                "id": 1,
+                "payment_year": 2023,
+                "payment_month": 1,
+                "gross_pay": 4368.89,
+                "hours_worked": 188
+            },
+            {
+                "id": 2,
+                "payment_year": 2023,
+                "payment_month": 2,
+                "gross_pay": 7910.81,
+                "hours_worked": 180
+            },
+            {
+                "id": 3,
+                "payment_year": 2023,
+                "payment_month": 3,
+                "gross_pay": 6024.59,
+                "hours_worked": 200
+            },
+            {
+                "id": 4,
+                "payment_year": 2023,
+                "payment_month": 4,
+                "gross_pay": 4942.6,
+                "hours_worked": 190
+            },
+            {
+                "id": 5,
+                "payment_year": 2023,
+                "payment_month": 5,
+                "gross_pay": 4616.14,
+                "hours_worked": 170
+            },
+            {
+                "id": 6,
+                "payment_year": 2023,
+                "payment_month": 6,
+                "gross_pay": 7555.19,
+                "hours_worked": 179
+            },
+            {
+                "id": 7,
+                "payment_year": 2023,
+                "payment_month": 7,
+                "gross_pay": 9077.9,
+                "hours_worked": 167
+            },
+            {
+                "id": 8,
+                "payment_year": 2023,
+                "payment_month": 8,
+                "gross_pay": 6568.32,
+                "hours_worked": 174
+            },
+            {
+                "id": 9,
+                "payment_year": 2023,
+                "payment_month": 9,
+                "gross_pay": 7242.07,
+                "hours_worked": 187
+            },
+            {
+                "id": 10,
+                "payment_year": 2023,
+                "payment_month": 10,
+                "gross_pay": 7297.29,
+                "hours_worked": 161
+            },
+            {
+                "id": 11,
+                "payment_year": 2023,
+                "payment_month": 11,
+                "gross_pay": 3900.09,
+                "hours_worked": 178
+            },
+            {
+                "id": 12,
+                "payment_year": 2023,
+                "payment_month": 12,
+                "gross_pay": 7977.47,
+                "hours_worked": 175
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Employee 2",
+        "department": "Sales",
+        "position": "Specialist",
+        "Salary": [
+            {
+                "id": 1,
+                "payment_year": 2023,
+                "payment_month": 1,
+                "gross_pay": 5948.04,
+                "hours_worked": 171
+            },
+            {
+                "id": 2,
+                "payment_year": 2023,
+                "payment_month": 2,
+                "gross_pay": 7066.78,
+                "hours_worked": 166
+            },
+            {
+                "id": 3,
+                "payment_year": 2023,
+                "payment_month": 3,
+                "gross_pay": 8815.44,
+                "hours_worked": 184
+            },
+            {
+                "id": 4,
+                "payment_year": 2023,
+                "payment_month": 4,
+                "gross_pay": 4840.0,
+                "hours_worked": 176
+            },
+            {
+                "id": 5,
+                "payment_year": 2023,
+                "payment_month": 5,
+                "gross_pay": 7930.13,
+                "hours_worked": 196
+            },
+            {
+                "id": 6,
+                "payment_year": 2023,
+                "payment_month": 6,
+                "gross_pay": 9040.48,
+                "hours_worked": 172
+            },
+            {
+                "id": 7,
+                "payment_year": 2023,
+                "payment_month": 7,
+                "gross_pay": 4501.71,
+                "hours_worked": 180
+            },
+            {
+                "id": 8,
+                "payment_year": 2023,
+                "payment_month": 8,
+                "gross_pay": 7238.96,
+                "hours_worked": 199
+            },
+            {
+                "id": 9,
+                "payment_year": 2023,
+                "payment_month": 9,
+                "gross_pay": 3764.5,
+                "hours_worked": 198
+            },
+            {
+                "id": 10,
+                "payment_year": 2023,
+                "payment_month": 10,
+                "gross_pay": 8374.27,
+                "hours_worked": 200
+            },
+            {
+                "id": 11,
+                "payment_year": 2023,
+                "payment_month": 11,
+                "gross_pay": 7164.38,
+                "hours_worked": 184
+            },
+            {
+                "id": 12,
+                "payment_year": 2023,
+                "payment_month": 12,
+                "gross_pay": 5212.26,
+                "hours_worked": 173
+            }
+        ]
+    }
+]
