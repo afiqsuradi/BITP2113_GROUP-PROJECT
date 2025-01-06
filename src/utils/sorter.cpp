@@ -319,7 +319,7 @@ Node<EmployeeModel> *Sorter::splitIterative(Node<EmployeeModel> *head) {
     return temp;
 }
 
-Node<EmployeeModel> *Sorter::mergeIterative(Node<EmployeeModel> *left, Node<EmployeeModel> *right) {
+Node<EmployeeModel> *Sorter::mergeIterative(Node<EmployeeModel> *left, Node<EmployeeModel> *right, long long &swaps) {
     if (left == nullptr) return right;
     if (right == nullptr) return left;
 
@@ -338,6 +338,7 @@ Node<EmployeeModel> *Sorter::mergeIterative(Node<EmployeeModel> *left, Node<Empl
             }
             left = left->next;
         } else {
+            swaps++;
             if (result == nullptr) {
                 result = right;
                 tail = right;
@@ -361,11 +362,17 @@ Node<EmployeeModel> *Sorter::mergeIterative(Node<EmployeeModel> *left, Node<Empl
 }
 
 void Sorter::mergeSortIterative(EmployeeList *employee) {
+    long long swaps = 0;
+    auto start = std::chrono::high_resolution_clock::now();
+    std::time_t startTimeT = std::chrono::system_clock::to_time_t(start);
+    std::tm *localStartTime = std::localtime(&startTimeT);
+    auto startCalculation = start;
+
     if (employee->getHead() == nullptr || employee->getHead()->next == nullptr) {
         return;
     }
 
-    Node<Node<EmployeeModel> *> *head = new Node<Node<EmployeeModel> *>(employee->getHead());
+    Node<Node<EmployeeModel> *> *head = new Node(employee->getHead());
     Node<Node<EmployeeModel> *> *tail = head;
 
     Node<EmployeeModel> *curr = employee->getHead();
@@ -388,7 +395,7 @@ void Sorter::mergeSortIterative(EmployeeList *employee) {
             Node<Node<EmployeeModel> *> *right = (current->next != nullptr) ? current->next : nullptr;
             current = (right != nullptr) ? right->next : nullptr;
 
-            Node<EmployeeModel> *merged = mergeIterative(left->data, (right != nullptr) ? right->data : nullptr);
+            Node<EmployeeModel> *merged = mergeIterative(left->data, (right != nullptr) ? right->data : nullptr, swaps);
             if (newHead == nullptr) {
                 newHead = new Node<Node<EmployeeModel> *>(merged);
                 newTail = newHead;
@@ -409,4 +416,19 @@ void Sorter::mergeSortIterative(EmployeeList *employee) {
     employee->setHead(head->data);
     employee->fixTail();
     delete head;
+
+    auto end = std::chrono::high_resolution_clock::now();
+    std::time_t endTimeT = std::chrono::system_clock::to_time_t(end);
+    std::tm *localEndTime = std::localtime(&endTimeT);
+    auto endCalculation = end;
+
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(endCalculation - startCalculation);
+
+    std::cout << "Merge Sort Start Time: ";
+    std::cout << std::put_time(localStartTime, "%H:%M:%S") << std::endl;
+    std::cout << "Merge Sort End Time: ";
+    std::cout << std::put_time(localEndTime, "%H:%M:%S") << std::endl;
+    std::cout << "Time taken by Merge Sort: " << duration.count() << " milliseconds" << std::endl;
+    std::cout << "Merge Performed: " << swaps << std::endl;
 }
+

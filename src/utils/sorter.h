@@ -22,7 +22,7 @@ public:
 private:
     static Node<EmployeeModel> *splitIterative(Node<EmployeeModel> *head);
 
-    static Node<EmployeeModel> *mergeIterative(Node<EmployeeModel> *left, Node<EmployeeModel> *right);
+    static Node<EmployeeModel> *mergeIterative(Node<EmployeeModel> *left, Node<EmployeeModel> *right, long long &swaps);
 
     template<typename T>
     static Node<T> *mergeSortRecur(Node<T> *head, long long *mergeDecisions);

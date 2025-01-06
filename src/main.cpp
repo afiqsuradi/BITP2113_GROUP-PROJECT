@@ -47,7 +47,7 @@ int main() {
                 break;
             case SORT_TECHNIQUE_TWO_IMPROVED:
                 uiController.clearScreen();
-                Sorter::mergeSortImproved(employeeController.getEmployees());
+                Sorter::mergeSortIterative(employeeController.getEmployees());
                 employeeController.getEmployees()->printEmployees(100);
                 system("pause");
                 break;
