@@ -300,3 +300,113 @@ void Sorter::insertionSortImproved(EmployeeList *employees) {
     std::cout << "Time taken by Improved Insertion Sort: " << duration.count() << " milliseconds" << std::endl;
     std::cout << "Swaps Performed: " << swaps << std::endl;
 }
+
+Node<EmployeeModel> *Sorter::splitIterative(Node<EmployeeModel> *head) {
+    if (head == nullptr || head->next == nullptr) {
+        return head;
+    }
+
+    Node<EmployeeModel> *slow = head;
+    Node<EmployeeModel> *fast = head->next;
+
+    while (fast != nullptr && fast->next != nullptr) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    Node<EmployeeModel> *temp = slow->next;
+    slow->next = nullptr;
+    return temp;
+}
+
+Node<EmployeeModel> *Sorter::mergeIterative(Node<EmployeeModel> *left, Node<EmployeeModel> *right) {
+    if (left == nullptr) return right;
+    if (right == nullptr) return left;
+
+    Node<EmployeeModel> *result = nullptr;
+    Node<EmployeeModel> *tail = nullptr;
+
+
+    while (left != nullptr && right != nullptr) {
+        if (left->data.id <= right->data.id) {
+            if (result == nullptr) {
+                result = left;
+                tail = left;
+            } else {
+                tail->next = left;
+                tail = left;
+            }
+            left = left->next;
+        } else {
+            if (result == nullptr) {
+                result = right;
+                tail = right;
+            } else {
+                tail->next = right;
+                tail = right;
+            }
+            right = right->next;
+        }
+    }
+
+    if (left != nullptr) {
+        tail->next = left;
+    }
+    if (right != nullptr) {
+        tail->next = right;
+    }
+
+
+    return result;
+}
+
+void Sorter::mergeSortIterative(EmployeeList *employee) {
+    if (employee->getHead() == nullptr || employee->getHead()->next == nullptr) {
+        return;
+    }
+
+    Node<Node<EmployeeModel> *> *head = new Node<Node<EmployeeModel> *>(employee->getHead());
+    Node<Node<EmployeeModel> *> *tail = head;
+
+    Node<EmployeeModel> *curr = employee->getHead();
+    while (curr != nullptr) {
+        if (curr != employee->getHead()) {
+            tail->next = new Node<Node<EmployeeModel> *>(curr);
+            tail = tail->next;
+        }
+        curr = curr->next;
+        tail->data->next = nullptr;
+    }
+
+    while (head->next != nullptr) {
+        Node<Node<EmployeeModel> *> *newHead = nullptr;
+        Node<Node<EmployeeModel> *> *newTail = nullptr;
+
+        Node<Node<EmployeeModel> *> *current = head;
+        while (current != nullptr) {
+            Node<Node<EmployeeModel> *> *left = current;
+            Node<Node<EmployeeModel> *> *right = (current->next != nullptr) ? current->next : nullptr;
+            current = (right != nullptr) ? right->next : nullptr;
+
+            Node<EmployeeModel> *merged = mergeIterative(left->data, (right != nullptr) ? right->data : nullptr);
+            if (newHead == nullptr) {
+                newHead = new Node<Node<EmployeeModel> *>(merged);
+                newTail = newHead;
+            } else {
+                newTail->next = new Node<Node<EmployeeModel> *>(merged);
+                newTail = newTail->next;
+            }
+        }
+        Node<Node<EmployeeModel> *> *temp = head;
+        while (temp != nullptr) {
+            Node<Node<EmployeeModel> *> *toDelete = temp;
+            temp = temp->next;
+            delete toDelete;
+        }
+        head = newHead;
+        tail = newTail;
+    }
+    employee->setHead(head->data);
+    employee->fixTail();
+    delete head;
+}
