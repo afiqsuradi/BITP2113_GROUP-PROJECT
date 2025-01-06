@@ -7,8 +7,7 @@ private:
     int *quitProgram, *operationChoice, menuChoice = 0;
 
     void handleDisplayMenu() {
-        std::cout << "Choice: ";
-        std::cin >> menuChoice;
+        getChoice(menuChoice);
         switch (menuChoice) {
             case 1:
                 displaySortingTechniquesChoices();
@@ -25,13 +24,15 @@ private:
             case 5:
                 *quitProgram = 1;
                 break;
+            default:
+                *operationChoice = NO_OPERATION;
+                break;
         }
     }
 
     void handleSortingTechniquesChoices() {
         int techniqueChoice = 0;
-        std::cout << "Choice: ";
-        std::cin >> menuChoice;
+        getChoice(menuChoice);
         switch (menuChoice) {
             case 1:
                 displayTechniqueVersionChoice("Technique 1 (Insertion Sort)");
@@ -59,6 +60,9 @@ private:
                 } else if (techniqueChoice == 2) {
                     *operationChoice = SORT_COMPARE_IMPROVED;
                 }
+                break;
+            default:
+                *operationChoice = NO_OPERATION;
                 break;
         }
     }
@@ -94,6 +98,27 @@ private:
                 } else if (techniqueChoice == 2) {
                     *operationChoice = SEARCH_COMPARE_IMPROVED;
                 }
+                break;
+            default:
+                *operationChoice = NO_OPERATION;
+                break;
+        }
+    }
+
+    void handleAddiotionalFunctionalities() {
+        getChoice(menuChoice);
+        switch (menuChoice) {
+            case 1:
+                *operationChoice = ADDITIONAL_ONE;
+                break;
+            case 2:
+                *operationChoice = ADDITIONAL_TWO;
+                break;
+            case 3:
+                *operationChoice = ADDITIONAL_THREE;
+                break;
+            default:
+                *operationChoice = NO_OPERATION;
                 break;
         }
     }
@@ -189,10 +214,11 @@ public:
                 << std::endl
                 << std::endl;
         std::cout << "Please select an option:" << std::endl;
-        std::cout << "1. Calculate Total Salary Paid to an Employee in a Year" << std::endl;
-        std::cout << "2. Calculate Average Salary of an Employee in a Year" << std::endl;
-        std::cout << "3. Find employees who earned more than a given salary in a month" << std::endl;
-        std::cout << "4.  Back to Main Menu" << std::endl
+        std::cout << "1. Average Salary Calculation per Department" << std::endl;
+        std::cout << "2. Most Productive Employee Per Department" << std::endl;
+        std::cout << "3. Performance-Based Bonus Calculation" << std::endl;
+        std::cout << "4. Back to Main Menu" << std::endl
                 << std::endl;
+        handleAddiotionalFunctionalities();
     }
 };

@@ -3,6 +3,7 @@
 #include "libs/employee_list.h"
 #include "utils/sorter.h"
 #include "utils/searcher.h"
+#include "utils/employee_analytics.h"
 #include "controllers/employee_controller.h"
 #include "controllers/ui_controller.cpp"
 #include <string>
@@ -10,6 +11,7 @@
 
 int main() {
     Sorter sorter;
+    std::string bonusGenPath = "employee_annual_bonus.txt";
     EmployeeController employeeController("employee_data_shuffled.json");
     int exitProgram = 0, operationChoice = 0, searchId = 0;
     long long duration = 0;
@@ -88,7 +90,6 @@ int main() {
                 system("pause");
                 break;
             case SEARCH_TECHNIQUE_ONE_IMPROVED:
-
                 uiController.clearScreen();
                 UiController::displayHeader("Technique 1 (Linear Search)");
                 std::cout << "Please enter employee id you want to search: ";
@@ -97,7 +98,6 @@ int main() {
                 system("pause");
                 break;
             case SEARCH_TECHNIQUE_TWO_IMPROVED:
-
                 uiController.clearScreen();
                 UiController::displayHeader("Technique 2 (binary Search)");
                 std::cout << "Please enter employee id you want to search: ";
@@ -127,7 +127,25 @@ int main() {
                 Searcher::binarySearchImproved(employeeController.getEmployees(), searchId);
                 system("pause");
                 break;
+            case ADDITIONAL_ONE:
+                uiController.clearScreen();
+                EmployeeAnalytics::calculateAverageSalaryPerDepartment(*employeeController.getEmployees());
+                system("pause");
+                break;
+            case ADDITIONAL_TWO:
+                uiController.clearScreen();
+                EmployeeAnalytics::findMostProductiveEmployeesPerDepartment(*employeeController.getEmployees(), 10);
+                system("pause");
+                break;
+            case ADDITIONAL_THREE:
+                uiController.clearScreen();
+                EmployeeAnalytics::calculatePerformanceBasedBonus(*employeeController.getEmployees(), 0.1,
+                                                                  bonusGenPath);
+                system("pause");
+                break;
             case DATA_RELOAD:
+                uiController.clearScreen();
+                std::cout << "Reloading data..." << std::endl;
                 employeeController.loadFromJson();
                 break;
             default: break;
