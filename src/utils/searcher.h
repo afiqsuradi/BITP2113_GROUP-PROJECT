@@ -2,7 +2,7 @@
 #define SEARCHER_H
 
 #include "employee_list.h"
-#include <ctime>
+#include <chrono>
 
 class Searcher {
 public:
@@ -26,7 +26,8 @@ private:
 
     static void displayResult(Node<EmployeeModel> *result, int &targetId, std::string searchType);
 
-    static void displayTime(std::time_t startTime, std::time_t endTime);
+    static void displayTime(std::chrono::time_point<std::chrono::system_clock> startTime,
+                            std::chrono::time_point<std::chrono::system_clock> endTime);
 };
 
 #endif

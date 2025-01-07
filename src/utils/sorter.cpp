@@ -105,8 +105,6 @@ void Sorter::mergeSort(EmployeeList *employees) {
         return;
     long long swaps = 0;
     auto start = std::chrono::high_resolution_clock::now();
-    std::time_t startTimeT = std::chrono::system_clock::to_time_t(start);
-    std::tm *localStartTime = std::localtime(&startTimeT);
     auto startCalculation = start;
 
     Node<EmployeeModel> *sortedHead = mergeSortRecurImproved(employees->getHead(), &swaps);
@@ -122,17 +120,19 @@ void Sorter::mergeSort(EmployeeList *employees) {
         employees->setTail(nullptr);
     }
 
+
     auto end = std::chrono::high_resolution_clock::now();
-    std::time_t endTimeT = std::chrono::system_clock::to_time_t(end);
-    std::tm *localEndTime = std::localtime(&endTimeT);
     auto endCalculation = end;
+    auto startTimeUnix = std::chrono::duration_cast<std::chrono::milliseconds>(startCalculation.time_since_epoch()).
+            count();
+    auto endTimeUnix = std::chrono::duration_cast<std::chrono::milliseconds>(endCalculation.time_since_epoch()).count();
 
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(endCalculation - startCalculation);
 
     std::cout << "Merge Sort Start Time: ";
-    std::cout << std::put_time(localStartTime, "%H:%M:%S") << std::endl;
+    std::cout << startTimeUnix << " ms " << std::endl;
     std::cout << "Merge Sort End Time: ";
-    std::cout << std::put_time(localEndTime, "%H:%M:%S") << std::endl;
+    std::cout << endTimeUnix << " ms " << std::endl;
     std::cout << "Time taken by Merge Sort: " << duration.count() << " milliseconds" << std::endl;
     std::cout << "Merge Performed: " << swaps << std::endl;
 }
@@ -185,9 +185,8 @@ void Sorter::insertionSort(EmployeeList *employees) {
         return;
 
     long long swaps = 0;
+
     auto start = std::chrono::high_resolution_clock::now();
-    std::time_t startTimeT = std::chrono::system_clock::to_time_t(start);
-    std::tm *localStartTime = std::localtime(&startTimeT);
     auto startCalculation = start;
 
     Node<EmployeeModel> *sorted = nullptr;
@@ -201,7 +200,7 @@ void Sorter::insertionSort(EmployeeList *employees) {
             current->next = sorted;
             sorted = current;
         } else {
-            Node<EmployeeModel> *insertPosition = sorted; // Ni kepala kasi jalan sampai hujung
+            Node<EmployeeModel> *insertPosition = sorted;
             Node<EmployeeModel> *prevInsertPosition = nullptr;
             while (insertPosition != nullptr && insertPosition->data.id < current->data.id) {
                 prevInsertPosition = insertPosition;
@@ -228,17 +227,19 @@ void Sorter::insertionSort(EmployeeList *employees) {
         employees->setTail(nullptr);
     }
 
+
     auto end = std::chrono::high_resolution_clock::now();
-    std::time_t endTimeT = std::chrono::system_clock::to_time_t(end);
-    std::tm *localEndTime = std::localtime(&endTimeT);
     auto endCalculation = end;
+    auto startTimeUnix = std::chrono::duration_cast<std::chrono::milliseconds>(startCalculation.time_since_epoch()).
+            count();
+    auto endTimeUnix = std::chrono::duration_cast<std::chrono::milliseconds>(endCalculation.time_since_epoch()).count();
 
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(endCalculation - startCalculation);
 
     std::cout << "Insertion Sort Start Time: ";
-    std::cout << std::put_time(localStartTime, "%H:%M:%S") << std::endl;
+    std::cout << startTimeUnix << " ms " << std::endl;
     std::cout << "Insertion Sort End Time: ";
-    std::cout << std::put_time(localEndTime, "%H:%M:%S") << std::endl;
+    std::cout << endTimeUnix << " ms " << std::endl;
     std::cout << "Time taken by Insertion Sort: " << duration.count() << " milliseconds" << std::endl;
     std::cout << "Swaps Performed: " << swaps << std::endl;
 }
@@ -249,8 +250,6 @@ void Sorter::insertionSortImproved(EmployeeList *employees) {
 
     long long swaps = 0;
     auto start = std::chrono::high_resolution_clock::now();
-    std::time_t startTimeT = std::chrono::system_clock::to_time_t(start);
-    std::tm *localStartTime = std::localtime(&startTimeT);
     auto startCalculation = start;
 
     Node<EmployeeModel> *sorted = nullptr;
@@ -291,16 +290,17 @@ void Sorter::insertionSortImproved(EmployeeList *employees) {
 
 
     auto end = std::chrono::high_resolution_clock::now();
-    std::time_t endTimeT = std::chrono::system_clock::to_time_t(end);
-    std::tm *localEndTime = std::localtime(&endTimeT);
     auto endCalculation = end;
-
+    auto startTimeUnix = std::chrono::duration_cast<std::chrono::milliseconds>(startCalculation.time_since_epoch()).
+            count();
+    auto endTimeUnix = std::chrono::duration_cast<std::chrono::milliseconds>(endCalculation.time_since_epoch()).count();
 
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(endCalculation - startCalculation);
+
     std::cout << "Improved Insertion Sort Start Time: ";
-    std::cout << std::put_time(localStartTime, "%H:%M:%S") << std::endl;
+    std::cout << startTimeUnix << " ms " << std::endl;
     std::cout << "Improved Insertion Sort End Time: ";
-    std::cout << std::put_time(localEndTime, "%H:%M:%S") << std::endl;
+    std::cout << endTimeUnix << " ms " << std::endl;
     std::cout << "Time taken by Improved Insertion Sort: " << duration.count() << " milliseconds" << std::endl;
     std::cout << "Swaps Performed: " << swaps << std::endl;
 }
@@ -368,8 +368,6 @@ Node<EmployeeModel> *Sorter::mergeIterative(Node<EmployeeModel> *left, Node<Empl
 void Sorter::mergeSortIterative(EmployeeList *employee) {
     long long swaps = 0;
     auto start = std::chrono::high_resolution_clock::now();
-    std::time_t startTimeT = std::chrono::system_clock::to_time_t(start);
-    std::tm *localStartTime = std::localtime(&startTimeT);
     auto startCalculation = start;
 
     if (employee->getHead() == nullptr || employee->getHead()->next == nullptr) {
@@ -422,16 +420,15 @@ void Sorter::mergeSortIterative(EmployeeList *employee) {
     delete head;
 
     auto end = std::chrono::high_resolution_clock::now();
-    std::time_t endTimeT = std::chrono::system_clock::to_time_t(end);
-    std::tm *localEndTime = std::localtime(&endTimeT);
     auto endCalculation = end;
+    auto startTimeUnix = std::chrono::duration_cast<std::chrono::milliseconds>(startCalculation.time_since_epoch()).
+            count();
+    auto endTimeUnix = std::chrono::duration_cast<std::chrono::milliseconds>(endCalculation.time_since_epoch()).count();
 
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(endCalculation - startCalculation);
 
-    std::cout << "Merge Sort Start Time: ";
-    std::cout << std::put_time(localStartTime, "%H:%M:%S") << std::endl;
-    std::cout << "Merge Sort End Time: ";
-    std::cout << std::put_time(localEndTime, "%H:%M:%S") << std::endl;
+    std::cout << "Merge Sort Start Time: " << startTimeUnix << " ms" << std::endl;
+    std::cout << "Merge Sort End Time: " << endTimeUnix << " ms" << std::endl;
     std::cout << "Time taken by Merge Sort: " << duration.count() << " milliseconds" << std::endl;
     std::cout << "Merge Performed: " << swaps << std::endl;
 }

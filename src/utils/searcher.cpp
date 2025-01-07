@@ -16,19 +16,17 @@ void Searcher::displayResult(Node<EmployeeModel> *result, int &targetId, std::st
     }
 }
 
-void Searcher::displayTime(std::time_t startTime, std::time_t endTime) {
-    std::tm *localStartTime = std::localtime(&startTime);
-    std::tm *localEndTime = std::localtime(&endTime);
+void Searcher::displayTime(std::chrono::time_point<std::chrono::system_clock> startCalculation,
+                           std::chrono::time_point<std::chrono::system_clock> endCalculation) {
+    auto startTimeUnix = std::chrono::duration_cast<std::chrono::milliseconds>(startCalculation.time_since_epoch()).
+            count();
+    auto endTimeUnix = std::chrono::duration_cast<std::chrono::milliseconds>(endCalculation.time_since_epoch()).count();
 
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(endCalculation - startCalculation);
     std::cout << "Start Time: ";
-    std::cout << std::put_time(localStartTime, "%H:%M:%S") << std::endl;
+    std::cout << startTimeUnix << " ms " << std::endl;
     std::cout << "End Time: ";
-    std::cout << std::put_time(localEndTime, "%H:%M:%S") << std::endl;
-
-    auto start = std::chrono::system_clock::from_time_t(startTime);
-    auto end = std::chrono::system_clock::from_time_t(endTime);
-    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-
+    std::cout << endTimeUnix << " ms " << std::endl;
     std::cout << "Time taken: " << duration.count() << " milliseconds" << std::endl;
 }
 
@@ -36,7 +34,7 @@ void Searcher::displayTime(std::time_t startTime, std::time_t endTime) {
 Node<EmployeeModel> *Searcher::linearSearch(EmployeeList *employees, int targetId) {
     long long duration = 0;
     auto start = std::chrono::high_resolution_clock::now();
-    std::time_t startTimeT = std::chrono::system_clock::to_time_t(start);
+    auto startCalculation = start;
 
     Node<EmployeeModel> *current = employees->getHead();
     Node<EmployeeModel> *result = nullptr;
@@ -49,9 +47,10 @@ Node<EmployeeModel> *Searcher::linearSearch(EmployeeList *employees, int targetI
         }
         current = current->next;
     }
+
     auto end = std::chrono::high_resolution_clock::now();
-    std::time_t endTimeT = std::chrono::system_clock::to_time_t(end);
-    displayTime(startTimeT, endTimeT);
+    auto endCalculation = end;
+    displayTime(startCalculation, endCalculation);
     displayResult(result, targetId, "Linear Search");
 
     std::cout << "Linear Search Iterations: " << iterationCount << std::endl;
@@ -62,7 +61,7 @@ Node<EmployeeModel> *Searcher::linearSearch(EmployeeList *employees, int targetI
 Node<EmployeeModel> *Searcher::linearSearchImproved(EmployeeList *employees, int targetId) {
     long long duration = 0;
     auto start = std::chrono::high_resolution_clock::now();
-    std::time_t startTimeT = std::chrono::system_clock::to_time_t(start);
+    auto startCalculation = start;
 
     Node<EmployeeModel> *current = employees->getHead();
     Node<EmployeeModel> *result = nullptr;
@@ -78,8 +77,8 @@ Node<EmployeeModel> *Searcher::linearSearchImproved(EmployeeList *employees, int
     }
 
     auto end = std::chrono::high_resolution_clock::now();
-    std::time_t endTimeT = std::chrono::system_clock::to_time_t(end);
-    displayTime(startTimeT, endTimeT);
+    auto endCalculation = end;
+    displayTime(startCalculation, endCalculation);
     displayResult(result, targetId, "Linear Search (Improved)");
 
     std::cout << "Linear Search (Improved) Iterations: " << iterationCount << std::endl;
@@ -90,15 +89,14 @@ Node<EmployeeModel> *Searcher::linearSearchImproved(EmployeeList *employees, int
 
 Node<EmployeeModel> *Searcher::binarySearch(EmployeeList *employees, int targetId) {
     auto start = std::chrono::high_resolution_clock::now();
-    std::time_t startTimeT = std::chrono::system_clock::to_time_t(start);
+    auto startCalculation = start;
     int iterationCount = 0;
 
     Node<EmployeeModel> *result = binarySearchRecur(employees->getHead(), targetId, iterationCount);
 
     auto end = std::chrono::high_resolution_clock::now();
-    std::time_t endTimeT = std::chrono::system_clock::to_time_t(end);
-    displayTime(startTimeT, endTimeT);
-
+    auto endCalculation = end;
+    displayTime(startCalculation, endCalculation);
     displayResult(result, targetId, "Binary Search");
     std::cout << "Binary Search Iterations: " << iterationCount << std::endl;
     return result;
@@ -147,7 +145,7 @@ Node<T> *Searcher::binarySearchRecur(Node<T> *head, int targetId, int &iteration
 
 Node<EmployeeModel> *Searcher::binarySearchImproved(EmployeeList *employees, int targetId) {
     auto start = std::chrono::high_resolution_clock::now();
-    std::time_t startTimeT = std::chrono::system_clock::to_time_t(start);
+    auto startCalculation = start;
 
 
     Node<EmployeeModel> *startNode = employees->getHead();
@@ -178,8 +176,8 @@ Node<EmployeeModel> *Searcher::binarySearchImproved(EmployeeList *employees, int
     }
 
     auto end = std::chrono::high_resolution_clock::now();
-    std::time_t endTimeT = std::chrono::system_clock::to_time_t(end);
-    displayTime(startTimeT, endTimeT);
+    auto endCalculation = end;
+    displayTime(startCalculation, endCalculation);
     displayResult(result, targetId, "Binary Search (Optimized)");
     std::cout << "Binary Search (Optimized) Iterations: " << iterationCount << std::endl;
     return result;
