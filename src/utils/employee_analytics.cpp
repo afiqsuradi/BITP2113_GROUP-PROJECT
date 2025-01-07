@@ -14,7 +14,6 @@ void EmployeeAnalytics::calculateAverageSalaryPerDepartment(const EmployeeList &
         double totalSalary = 0;
         int salaryCount = 0;
 
-        //calculate sum salary per employee
         if (employee.salary_payments != nullptr) {
             Node<SalaryModel> *currentSalary = employee.salary_payments->getHead();
             while (currentSalary != nullptr) {
@@ -69,7 +68,7 @@ void EmployeeAnalytics::calculatePerformanceBasedBonus(const EmployeeList &emplo
                 }
             }
             if (count > 0)
-                bonusAmount = (totalSalary / count) * (bonusPercentage / 100.0);
+                bonusAmount = (totalSalary / count) * bonusPercentage;
 
             outputFile << "Employee ID: " << employee.id
                     << ", Name: " << employee.name
