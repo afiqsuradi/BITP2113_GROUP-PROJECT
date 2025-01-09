@@ -1,4 +1,8 @@
 #include <iostream>
+#include <fstream>
+#include <string>
+#include <cstdlib>
+#include <array>
 #include "linked_list.h"
 #include "libs/employee_list.h"
 #include "utils/sorter.h"
@@ -6,20 +10,34 @@
 #include "utils/employee_analytics.h"
 #include "controllers/employee_controller.h"
 #include "controllers/ui_controller.cpp"
-#include <string>
-#include <cstdlib>
+
 
 int main() {
     Sorter sorter;
     std::string bonusGenPath = "employee_annual_bonus.txt";
     EmployeeController employeeController("employee_data_shuffled.json");
-    int exitProgram = 0, operationChoice = 0, searchId = 0;
+    int exitProgram = 0, operationChoice = 0;
     long long duration = 0;
     UiController uiController(&exitProgram, &operationChoice);
     size_t employeeSize = employeeController.getEmployees()->getSize();
+
+    // Load search IDs from file
+    std::array<int, 100> searchIds;
+    std::ifstream searchFile("search_ids.txt");
+
+    if (!searchFile.is_open()) {
+        std::cerr << "Error opening search_ids.txt. Please create this file with 100 integer search ids" << std::endl;
+        return 1;
+    }
+    for (int i = 0; i < 100; ++i) {
+        if (!(searchFile >> searchIds[i])) {
+            std::cerr << "Error reading search ids from file. Make sure there are 100 integers." << std::endl;
+            return 1;
+        }
+    }
+    searchFile.close();
     while (!exitProgram) {
         operationChoice = 0;
-        searchId = 0;
         duration = 0;
 
         uiController.displayMenu(&employeeSize);
@@ -72,59 +90,45 @@ int main() {
                 system("pause");
                 break;
             case SEARCH_TECHNIQUE_ONE:
-
                 uiController.clearScreen();
                 UiController::displayHeader("Technique 1 (Linear Search)");
-                std::cout << "Please enter employee id you want to search: ";
-                std::cin >> searchId;
-                Searcher::linearSearch(employeeController.getEmployees(), searchId);
+                Searcher::linearSearch(employeeController.getEmployees(), searchIds);
                 system("pause");
                 break;
             case SEARCH_TECHNIQUE_TWO:
-
                 uiController.clearScreen();
                 UiController::displayHeader("Technique 2 (binary Search)");
-                std::cout << "Please enter employee id you want to search: ";
-                std::cin >> searchId;
-                Searcher::binarySearch(employeeController.getEmployees(), searchId);
+                Searcher::binarySearch(employeeController.getEmployees(), searchIds);
                 system("pause");
                 break;
             case SEARCH_TECHNIQUE_ONE_IMPROVED:
                 uiController.clearScreen();
                 UiController::displayHeader("Technique 1 (Linear Search)");
-                std::cout << "Please enter employee id you want to search: ";
-                std::cin >> searchId;
-                Searcher::linearSearchImproved(employeeController.getEmployees(), searchId);
+                Searcher::linearSearchImproved(employeeController.getEmployees(), searchIds);
                 system("pause");
                 break;
             case SEARCH_TECHNIQUE_TWO_IMPROVED:
                 uiController.clearScreen();
                 UiController::displayHeader("Technique 2 (binary Search)");
-                std::cout << "Please enter employee id you want to search: ";
-                std::cin >> searchId;
-                Searcher::binarySearchImproved(employeeController.getEmployees(), searchId);
+                Searcher::binarySearchImproved(employeeController.getEmployees(), searchIds);
                 system("pause");
                 break;
             case SEARCH_COMPARE:
                 uiController.clearScreen();
-                std::cout << "Please enter employee id you want to search: ";
-                std::cin >> searchId;
                 UiController::displayHeader("Technique 1 (Linear Search)");
-                Searcher::linearSearch(employeeController.getEmployees(), searchId);
+                Searcher::linearSearch(employeeController.getEmployees(), searchIds);
                 std::cout << "\n\n\n";
                 UiController::displayHeader("Technique 2 (Binary Search)");
-                Searcher::binarySearch(employeeController.getEmployees(), searchId);
+                Searcher::binarySearch(employeeController.getEmployees(), searchIds);
                 system("pause");
                 break;
             case SEARCH_COMPARE_IMPROVED:
                 uiController.clearScreen();
-                std::cout << "Please enter employee id you want to search: ";
-                std::cin >> searchId;
                 UiController::displayHeader("Improved Technique 1 (Linear Search)");
-                Searcher::linearSearchImproved(employeeController.getEmployees(), searchId);
+                Searcher::linearSearchImproved(employeeController.getEmployees(), searchIds);
                 std::cout << "\n\n\n";
                 UiController::displayHeader("Improved Technique 2 (Binary Search)");
-                Searcher::binarySearchImproved(employeeController.getEmployees(), searchId);
+                Searcher::binarySearchImproved(employeeController.getEmployees(), searchIds);
                 system("pause");
                 break;
             case ADDITIONAL_ONE:
