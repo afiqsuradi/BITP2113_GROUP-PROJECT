@@ -2,8 +2,9 @@
 #define LINKED_LIST_H
 
 #include <iostream>
+#include <memory>
 #include <stdexcept>
-#include "node.h" // Include the new Node header
+#include "node.h"
 
 template<typename T>
 class LinkedList {
@@ -63,7 +64,25 @@ public:
     void setTail(Node<T> *newTail);
 
     void fixTail();
+
+    std::unique_ptr<T[]> toArray() const;
 };
+
+template<typename T>
+std::unique_ptr<T[]> LinkedList<T>::toArray() const {
+    if (isEmpty()) {
+        return nullptr;
+    }
+
+    std::unique_ptr<T[]> arr(new T[size]);
+    Node<T> *current = head;
+    for (size_t i = 0; i < size; ++i) {
+        arr[i] = current->data;
+        current = current->next;
+    }
+
+    return arr;
+}
 
 template<typename T>
 void LinkedList<T>::fixTail() {

@@ -131,31 +131,43 @@ Node<T> *Searcher::binarySearchRecur(Node<T> *head, int targetId) {
 }
 
 void Searcher::binarySearchImproved(EmployeeList *employees, std::array<int, 100> &targetIds) {
+    std::unique_ptr<EmployeeModel[]> arr = employees->toArray();
+
     auto start = std::chrono::high_resolution_clock::now();
     auto startCalculation = start;
+    size_t size = employees->getSize();
+    if (arr == nullptr) {
+        for (int targetId: targetIds) {
+            displayResult(nullptr, targetId, "Binary Search (Optimized)");
+        }
+        auto end = std::chrono::high_resolution_clock::now();
+        auto endCalculation = end;
+        displayTime(startCalculation, endCalculation);
+        return;
+    }
 
     for (int targetId: targetIds) {
-        Node<EmployeeModel> *startNode = employees->getHead();
-        Node<EmployeeModel> *endNode = nullptr;
-        Node<EmployeeModel> *result = nullptr;
+        int left = 0;
+        int right = size - 1;
+        EmployeeModel *result = nullptr;
+        Node<EmployeeModel> *resultNode = nullptr;
 
-        while (startNode != endNode) {
-            Node<EmployeeModel> *mid = getMiddleImproved(startNode, endNode);
-
-            if (mid == nullptr) {
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (arr[mid].id == targetId) {
+                result = &arr[mid];
+                resultNode = new Node<EmployeeModel>(*result);
                 break;
-            }
-            if (mid->data.id == targetId) {
-                result = mid;
-                break;
-            }
-            if (mid->data.id > targetId) {
-                endNode = mid;
+            } else if (arr[mid].id < targetId) {
+                left = mid + 1;
             } else {
-                startNode = mid->next;
+                right = mid - 1;
             }
         }
-        displayResult(result, targetId, "Binary Search (Optimized)");
+        displayResult(resultNode, targetId, "Binary Search (Optimized)");
+        if (resultNode) {
+            delete resultNode;
+        }
     }
     auto end = std::chrono::high_resolution_clock::now();
     auto endCalculation = end;
